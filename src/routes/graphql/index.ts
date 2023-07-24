@@ -16,13 +16,12 @@ const plugin: FastifyPluginAsyncTypebox = async (fastify) => {
       try {
         const { query } = req.body;
         const res = await graphql({ schema: schema, source: query });
-        return res;
+        console.log(query);
+        return { data: res.data, errors: res.errors };
       } catch (err) {
         console.error('GraphQL error:', err);
         return { err: 'Internal Server Error' };
       }
-
-      /* return {}; */
     },
   });
 };
